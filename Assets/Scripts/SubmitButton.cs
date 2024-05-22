@@ -12,6 +12,7 @@ public class SubmitButton : MonoBehaviour
     public TMP_InputField playerInput;
 
     Button submitButton;
+    bool first = true;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class SubmitButton : MonoBehaviour
 
     public void OnClick()
     {
-        bool first = true;
+        
         string playerResponse = playerInput.text;
         playerInput.text = "";
         string coloredPlayerResponse = AddColor(playerResponse, Constants.Green);        
@@ -35,7 +36,8 @@ public class SubmitButton : MonoBehaviour
         }
         else
         {
-            GetResponseFromGemini(playerResponse);
+            string prompt = Constants.recallPrompt + narrativeText.text;            
+            GetResponseFromGemini(prompt);
         }
 
     }
